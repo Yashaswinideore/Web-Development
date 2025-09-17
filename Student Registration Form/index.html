@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .form-container {
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        label {
+            font-weight: bold;
+            margin: 8px 0 4px;
+            display: block;
+        }
+        
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        
+        .inline-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .inline-group label {
+            font-weight: normal;
+        }
+        
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        
+        .btn-submit {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-reset {
+            background: #f44336;
+            color: white;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        /* Popup Styling */
+        
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .popup.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .popup-content {
+            background: #fff;
+            padding: 25px 35px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: zoomIn 0.3s ease;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .popup-content h2 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        
+        .popup-content p {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .popup-content button {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .popup-content button:hover {
+            background: #43a047;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h1>Student Registration Form</h1>
+        <form id="regForm" action="#" method="post">
+
+            <!-- Full Name -->
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required minlength="3">
+
+            <!-- Email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <!-- Password -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required minlength="6">
+
+            <!-- Age -->
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="18" max="60">
+
+            <!-- Date of Birth -->
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob">
+
+            <!-- Select Dropdown -->
+            <label for="course">Choose your course:</label>
+            <select id="course" name="course" required>
+        <option value="">--Select--</option>
+        <option value="webdev">Web Development</option>
+        <option value="dsa">DSA</option>
+        <option value="ai">AI/ML</option>
+        <option value="datasci">Data Science</option>
+      </select>
+
+            <!-- Radio Buttons -->
+            <label>Gender:</label>
+            <div class="inline-group">
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+                <label><input type="radio" name="gender" value="other"> Other</label>
+            </div>
+
+            <!-- Checkboxes -->
+            <label>Skills:</label>
+            <div class="inline-group">
+                <label><input type="checkbox" name="skills" value="HTML"> HTML</label>
+                <label><input type="checkbox" name="skills" value="CSS"> CSS</label>
+                <label><input type="checkbox" name="skills" value="JavaScript"> JavaScript</label>
+                <label><input type="checkbox" name="skills" value="Python"> Python</label>
+            </div>
+
+            <!-- Textarea -->
+            <label for="about">Write something about yourself:</label>
+            <textarea id="about" name="about" rows="4" cols="40"></textarea>
+
+            <!-- Buttons -->
+            <button type="submit" class="btn-submit">Register</button>
+            <button type="reset" class="btn-reset">Reset</button>
+        </form>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="popup" id="successPopup">
+        <div class="popup-content">
+            <h2>Registration Successful ✅</h2>
+            <p>Your form has been submitted successfully.</p>
+            <button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("regForm");
+        const popup = document.getElementById("successPopup");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault(); // Prevent actual submission
+            popup.classList.add("active");
+        });
+
+        function closePopup() {
+            popup.classList.remove("active");
+            form.reset(); // reset form after closing popup
+        }
+    </script>
+
+</body>
+
+</html>
